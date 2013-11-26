@@ -70,13 +70,14 @@ class Name(CustomDict):
         else:
             required = {'family'}
             optional = {'given', 'dropping-particle', 'non-dropping-particle',
-                        'suffix'}
+                        'suffix', 'initials'}
         super(Name, self).__init__(args, required, optional)
 
     def parts(self):
         return (self.get('given'), self.get('family'),
                 self.get('dropping-particle'),
-                self.get('non-dropping-particle'), self.get('suffix'))
+                self.get('non-dropping-particle'), self.get('suffix'),
+                self.get('initials'))
 
 
 class DateBase(CustomDict):

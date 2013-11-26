@@ -1179,10 +1179,16 @@ class Name(CitationStylesElement, Formatted, Affixed, Delimited):
                 else:
                     names = names[:et_al_use_first]
             for i, name in enumerate(names):
-                given, family, dp, ndp, suffix = name.parts()
+                given, family, dp, ndp, suffix, initials = name.parts()
 
                 if given is not None and initialize_with is not None:
-                    given = self.initialize(given, initialize_with, context)
+                    if initials:
+                        # initials are supplied in the data model
+                        given = initials
+                    else:
+                        given = self.initialize(given,
+                                                initialize_with,
+                                                context)
 
                 if form == 'long':
                     if (name_as_sort_order == 'all' or
